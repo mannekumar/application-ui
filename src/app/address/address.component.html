@@ -1,0 +1,176 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid ">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" [routerLink]="['/home']">
+        <strong>InfyTel</strong>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a [routerLink]="['/profile']">View Profile</a></li>
+        <li><a [routerLink]="['/address']">View Address</a></li>
+        <li><a [routerLink]="['/card']">Card Details</a></li> 
+        <li><a [routerLink]="['/product']">View Products</a></li> 
+      </ul>
+      <button class="btn btn-primary navbar-btn navbar-right"  (click)='logout()'>Logout</button>
+    </div>
+  </div>
+</nav>
+<div *ngIf="address.length == 0"  class="form-group">
+    <button type="button" class="btn btn-primary" style="margin-left:5px;float:left" (click)="refresh()">Back</button>
+  </div>
+<div *ngIf="addressview">
+<div class="panel-body" style="text-align: -webkit-center;">      
+    <div *ngIf="address.length == 0" class="alert alert-info" style="width: 50%;">    
+      Address Are Empty !!!    
+    </div>    
+</div>   
+
+
+
+<div *ngIf="address.length != 0" class="row" style="margin-top: 50px;">
+  <div class="col-sm-3"></div>
+  <div class="container col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 align="center">Saved Address</h3>
+      </div>
+      <div class="panel-body">
+        <div class="col-sm-offset-1 col-sm-10">
+          <div class="table-responsive" style="margin-left:0%">
+            <div *ngFor="let data of address"  class="alert alert-info" style="width: 100%;background-color:white">  
+            <table class="table table-striped">
+              <tr>
+                <th>Email:</th>
+                <td><input class="form-control" type="text" name="email" [(ngModel)]='data.email' [disabled]='!data.editable'> </td>
+              </tr>
+              <tr>
+                <th>Address:</th>
+                <td><input class="form-control" type="text" name="address" [(ngModel)]='data.address' [disabled]='!data.editable'> </td>
+              </tr>
+              <tr>
+                <th>City:</th>
+                <td><input class="form-control" type="text" name="city" [(ngModel)]='data.city' [disabled]='!data.editable'> </td>
+              </tr>
+              <tr>
+                <th>State:</th>
+                <td><input class="form-control" type="text" name="state" [(ngModel)]='data.state' [disabled]='!data.editable'> </td>
+              </tr>
+              <tr>
+                <th>Pincode:</th>
+                <td><input class="form-control" type="number" name="pincode" [(ngModel)]='data.pincode' [disabled]='!data.editable'> </td>
+              </tr>
+              <tr>
+                <th>Phone number:</th>
+                <td><input class="form-control" type="number" name="phonenumber" [(ngModel)]='data.phonenumber' [disabled]='!data.editable'> </td>
+              </tr>
+              
+            </table>
+            <button style="margin-right:10px" class="btn btn-primary" (click)="edit(data.address_id)" [disabled]='data.editable'>Edit</button>
+            <button style="margin-right:10px" class="btn btn-primary" (click)="update(data.address_id)" [disabled]='!data.editable'>Update</button>
+            <button  class="btn btn-primary" (click)="delete(data.address_id)" >Delete</button>
+          </div>
+          </div>
+        </div>
+        <br>
+      </div>
+      <br><br>
+      <div class="panel-body">
+        <button class="btn btn-primary" style="margin-left:5px;" (click)="refresh()">Back</button>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div *ngIf="!addressview" class="panel-body">
+  <button class="btn btn-primary" style="margin-left:5px;float: right;" (click)="addressview=true">View added Address</button>
+</div>
+<div *ngIf="!addressview" class="row">
+    <div class="col-sm-4"></div>
+    <div class="container col-sm-4">
+      <div class="panel panel-default"> 
+        <div class="panel-heading">
+          <h3>Add new address</h3>
+        </div>
+        <div class="panel-body">
+        <form [formGroup]="registerForm">
+            <div class="form-group">
+                <label for="state">Select state:</label>
+                <select class="form-control"  name="state" formControlName="state">
+                    <option value='Andhra Pradesh'>Andhra Pradesh</option>
+                    <option value='Andaman and Nicobar Islands'>Andaman and Nicobar Islands</option>
+                    <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
+                    <option value='Assam'>Assam</option>
+                    <option value='Bihar'>Bihar</option>
+                    <option value='Chandigarh'>Chandigarh</option>
+                    <option value='Chhattisgarh'>Chhattisgarh</option>
+                    <option value='Dadar and Nagar Haveli'>Dadar and Nagar Haveli</option>
+                    <option value='Daman and Diu'>Daman and Diu</option>
+                    <option value='Delhi'>Delhi</option>
+                    <option value='Lakshadweep'>Lakshadweep</option>
+                    <option value='Puducherry'>Puducherry</option>
+                    <option value='Goa'>Goa</option>
+                    <option value='Gujarat'>Gujarat</option>
+                    <option value='Haryana'>Haryana</option>
+                    <option value='Himachal Pradesh'>Himachal Pradesh</option>
+                    <option value='Jammu and Kashmir'>Jammu and Kashmir</option>
+                    <option value='Jharkhand'>Jharkhand</option>
+                    <option value='Karnataka'>Karnataka</option>
+                    <option value='Kerala'>Kerala</option>
+                    <option value='Madhya Pradesh'>Madhya Pradesh</option>
+                    <option value='Maharashtra'>Maharashtra</option>
+                    <option value='Manipur'>Manipur</option>
+                    <option value='Meghalaya'>Meghalaya</option>
+                    <option value='Mizoram'>Mizoram</option>
+                    <option value='Nagaland'>Nagaland</option>
+                    <option value='Odisha'>Odisha</option>
+                    <option value='Punjab'>Punjab</option>
+                    <option value='Rajasthan'>Rajasthan</option>
+                    <option value='Sikkim'>Sikkim</option>
+                    <option value='Tamil Nadu'>Tamil Nadu</option>
+                    <option value='Telangana'>Telangana</option>
+                    <option value='Tripura'>Tripura</option>
+                    <option value='Uttar Pradesh'>Uttar Pradesh</option>
+                    <option value='Uttarakhand'>Uttarakhand</option>
+                    <option value='West Bengal'>West Bengal</option>
+                </select>
+              </div>
+          <div class="form-group">
+            <label for="Name">City:</label>&nbsp;<span class="red">*</span>
+            <input type="text" class="form-control" name="city" formControlName="city">
+          </div>
+          <div class="form-group">
+            <label for="address">Address/street:</label>&nbsp;<span class="red">*</span>
+            <input type="text" class="form-control" name="address" formControlName="address">
+          </div>
+          <div class="form-group">
+            <label for="pincode">Pin code:</label>&nbsp;<span class="red">*</span>
+            <input type="number" class="form-control" name="pincode" formControlName="pincode">
+          </div>
+          <div class="form-group">
+            <label for="phonenumber">Phone number:</label>&nbsp;<span class="red">*</span>
+            <input type="number" class="form-control" name="phonenumber" formControlName="phonenumber">
+          </div>
+          
+          
+          <button type="button" class="btn btn-primary" style="margin-left:5px;margin-right:30%" [routerLink]="['/home']">Back</button>
+
+          <button type="button" class="btn btn-primary"  [disabled]="!registerForm.valid" (click)="newaddress()">Add address</button><br>
+          <span style="color:green" >{{successMsg}}</span>
+          <span style="color:red" >{{errorMsg}}</span>
+        </form>
+      </div>
+      </div>
+     </div>
+     <div class="col-sm-4"></div>
+    </div>
+  

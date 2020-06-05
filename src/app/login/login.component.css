@@ -1,0 +1,28 @@
+#b1 {
+    padding : 5px;
+    margin : 5px
+}
+.carousel-indicators {
+    width: 5%;
+    top:5px;
+    left: 77.5%;
+    position: absolute;
+    white-space: nowrap;
+}
+.carousel-indicators .active {
+  	background-color:black;
+}
+.carousel-indicators li {
+   	border-color:black;
+   	cursor:default;
+}
+.red{
+    color:red;
+}
+.error{
+    color:red;
+   
+}
+.line-breaker {
+  white-space: pre-line;
+}

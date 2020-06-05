@@ -1,0 +1,157 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid ">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+  
+        <a class="navbar-brand" [routerLink]="['/home']">
+          <strong>InfyTel</strong>
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a [routerLink]="['/profile']">View Profile</a></li>
+          <li><a [routerLink]="['/address']">View Address</a></li>
+          <li><a [routerLink]="['/card']">Card Details</a></li> 
+          <li><a [routerLink]="['/product']">View Products</a></li> 
+        </ul>
+        <button class="btn btn-primary navbar-btn navbar-right" (click)='logout()'>Logout</button>
+      </div>
+    </div>
+  </nav>
+  <div *ngIf="cardview">
+  <div *ngIf="card.length != 0" class="row" style="margin-top: 50px;">
+    <div class="col-sm-3"></div>
+    <div class="container col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 align="center">Saved Cards</h3>
+        </div>
+        <div class="panel-body">
+          <div class="col-sm-offset-1 col-sm-10">
+            <div class="table-responsive" style="margin-left:20%">
+              <div *ngFor="let data of card" class="alert alert-info" style="width: 70%;">  
+              <table class="table table-striped">
+                <tr>
+                  <th>Name:</th>
+                  <td>{{data.name}}</td>
+                </tr>
+                <tr>
+                  <th>Card Number:</th>
+                  <td>{{data.card_number}}</td>
+                </tr>
+                <tr>
+                  <th>Expiry date:</th>
+                  <td >{{data.month}} / {{data.year}}</td>
+                </tr>
+              </table>
+              <button class="btn btn-primary" style="margin-left:5px;" (click)="delete(data.card_number)">Remove Card</button>
+            </div>
+            </div>
+          </div>
+          <br>
+        </div>
+        <br><br>
+        <div class="panel-body">
+          <button class="btn btn-primary" style="margin-left:5px;" (click)="refresh()">Back</button>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="card.length == 0"  class="form-group">
+    <button type="button" class="btn btn-primary" style="margin-left:5px;float:left" (click)="refresh()">Back</button>
+  </div>
+<div class="panel-body" style="text-align: -webkit-center;">    
+  
+    <div *ngIf="card.length == 0" class="alert alert-info" style="width: 50%;">    
+      No Cards Are Added !!!    
+    </div>    
+</div> 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div *ngIf="!cardview" class="panel-body">
+  <button class="btn btn-primary" style="margin-left:5px;float: right;" (click)="cardview=true">View added Cards</button>
+</div>
+<div *ngIf="!cardview" class="creditCardForm">
+    <div class="row">
+        <div class="container col-sm-12">
+          <div class="panel panel-default"> 
+            <div class="panel-heading">
+              <h3>Add new Card</h3>
+            </div>
+            <div class="panel-body">
+        <form [formGroup]="cardForm">
+            <div class="form-group" id="card-number-field">
+                <label for="owner">Name On the card</label>
+                <input placeholder="NAME PROVIDED ON THE CARD" type="text" class="form-control" name="name" formControlName="name">
+            </div>
+            <div class="form-group" id="card-number-field">
+                <label for="cardNumber">Card Number</label>
+                <input placeholder="xxxx-xxxx-xxxx-xxxx" type="number" class="form-control" name="card_number" formControlName="card_number" maxlength="16" pattern="[0-9]{16}">
+            </div>
+            <label>Expiration Date</label>
+            <div class="form-group">
+                <input placeholder="00" style="width:10%;display: initial;" type="number" class="form-control" name="month" formControlName="month" maxlength="2" pattern="[0-9]{2}">
+                <input placeholder="0000" style="width:20%;display: initial;margin-left:30px" type="number" class="form-control" name="year" formControlName="year" maxlength="4" pattern="[0-9]{4}">
+
+            </div>
+            <!-- <div class="form-group" >
+               <span>
+                <select class="form-control" name="month" formControlName="month"> 
+                    <option value="01">January</option>
+                    <option value="02">February </option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <select class="form-control" name="year" formControlName="year">
+                    <option value="16"> 2016</option>
+                    <option value="17"> 2017</option>
+                    <option value="18"> 2018</option>
+                    <option value="19"> 2019</option>
+                    <option value="20"> 2020</option>
+                    <option value="21"> 2021</option>
+                </select>
+              </span>
+            </div> -->
+           
+              
+            
+            <div class="form-group">
+              <button type="button" class="btn btn-primary" style="margin-left:5px;margin-right:30%" [routerLink]="['/home']">Back</button>
+                <button type="button" class="btn btn-primary"  [disabled]="!cardForm.valid" (click)='addcard()' >Add card</button><br>
+            </div>
+            <span style="color:green" >{{successMsg}}</span>
+            <span style="color:red" >{{errorMsg}}</span>
+        </form>
+    
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+

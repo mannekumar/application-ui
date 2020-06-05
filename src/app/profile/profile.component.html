@@ -1,0 +1,66 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid ">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+  
+        <a class="navbar-brand" [routerLink]="['/home']">
+          <strong>InfyTel</strong>
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a [routerLink]="['/profile']">View Profile</a></li>
+          <li><a [routerLink]="['/address']">View Address</a></li>
+          <li><a [routerLink]="['/card']">Card Details</a></li> 
+          <li><a [routerLink]="['/product']">View Products</a></li> 
+        </ul>
+        <button class="btn btn-primary navbar-btn navbar-right" (click)='logout()'>Logout</button>
+      </div>
+    </div>
+  </nav>
+  <div class="row" style="margin-top: 50px;">
+    <div class="col-sm-3"></div>
+    <div class="container col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 align="center">View Profile</h3>
+        </div>
+        <div class="panel-body">
+          <div class="col-sm-offset-1 col-sm-10">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <tr>
+                  <th>Email</th>
+                  <td>{{profileDetail.email}}</td>
+                </tr>
+                <tr>
+                  <th>Name</th>
+                  <td>{{profileDetail.name}}</td>
+                </tr>
+                <tr>
+                  <th>Type of Account</th>
+                  <td>{{profileDetail.account_type}}</td>
+                </tr>
+                
+              </table>
+              <br><br>
+            </div>
+          </div>
+          <br>
+          <div class="col-sm-offset-1">
+            <button class="btn btn-primary" style="margin-left:5px;" [routerLink]="['/home']">Back</button>
+          </div>
+        </div>
+        <br><br>
+        <div class="panel-body" *ngIf="errorMsg">
+          <div class="red">{{errorMsg}}</div><br>
+          <button class="btn btn-primary" style="margin-left:5px;" [routerLink]="['/home']">Back</button>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>

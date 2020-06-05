@@ -1,0 +1,41 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid ">
+    <div class="navbar-header">
+      <a class="navbar-brand" [routerLink]="['/login']">
+      <strong class="navbarHeader">InfyKart</strong></a>
+    </div>
+  </div>
+</nav>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="container col-sm-4">
+    <div class="panel panel-default"> 
+      <div class="panel-heading">
+        <h3>Login</h3>
+      </div>
+      <div class="panel-body">
+      <form [formGroup]="loginForm">
+        <div class="form-group">
+          <label for="Email">Email:</label>&nbsp;<span class="red">*</span>
+          <input type="text" class="form-control" name="email" formControlName="email">
+          <div *ngIf="(loginForm.controls['email'].errors && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched))" class="red">
+            <div *ngIf="loginForm.controls.email.errors.required">Email is required</div>
+            <div *ngIf="loginForm.controls.email.errors.pattern">Email should end with proper format</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>&nbsp;<span class="red">*</span>
+          <input type="password" class="form-control" name="password" formControlName="password">
+          <div *ngIf="(loginForm.controls['password'].errors && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched))" class="red">
+            Password is required
+          </div>
+        </div>
+        <div *ngIf="errorMsg"  class = "red">{{errorMsg}}<br></div><br>
+        <button type="button" class="btn btn-primary" id="submit" style="margin-right:10%" (click)="login()" [disabled]="!loginForm.valid">Login</button>
+        <button  type="button" class="btn btn-primary" [routerLink]="['/register']">Register</button><br>
+      </form>
+    </div>
+    </div>
+   </div>
+   <div class="col-sm-4"></div>
+  </div>

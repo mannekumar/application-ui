@@ -1,0 +1,54 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid ">
+    <div class="navbar-header">
+      <a class="navbar-brand" [routerLink]="['/login']">
+      <strong class="navbarHeader">InfyKart</strong></a>
+    </div>
+  </div>
+</nav>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="container col-sm-4">
+    <div class="panel panel-default"> 
+      <div class="panel-heading">
+        <h3>Register</h3>
+      </div>
+      <div class="panel-body">
+      <form [formGroup]="registerForm">
+        <div class="form-group">
+          <label for="Email">Email:</label>&nbsp;<span class="red">*</span>
+          <input type="text" class="form-control" name="email" formControlName="email">
+          <div *ngIf="(registerForm.controls['email'].errors && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched))" class="red">
+            <div *ngIf="registerForm.controls.email.errors.required">Email is required</div>
+            <div *ngIf="registerForm.controls.email.errors.pattern">Email should end with proper format</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Name">Name:</label>&nbsp;<span class="red">*</span>
+          <input type="text" class="form-control" name="name" formControlName="name">
+        </div>
+        <div class="form-group">
+		  <label for="acctype">Select account_type:</label>
+		  <select class="form-control"  name="account_type" formControlName="account_type">
+		    <option>Buyer</option>
+		    <option>Seller</option>
+		  </select>
+		</div>
+        <div class="form-group">
+          <label for="password">Password</label>&nbsp;<span class="red">*</span>
+          <input type="password" class="form-control" name="password" formControlName="password">
+          <div *ngIf="(registerForm.controls['password'].errors && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched))" class="red">
+            Password is required
+          </div>
+        </div>
+        <div *ngIf="successMsg"  class = "green">{{successMsg}}<br></div><br>
+        <div *ngIf="errorMsg"  class = "red">{{errorMsg}}<br></div><br>
+        <button type="button" class="btn btn-primary" style="margin:auto;display:block;" [disabled]="!registerForm.valid" (click)="register()">Register</button><br>
+        <button type="button" class="btn btn-primary" style="margin:auto;display:block;" [routerLink]="['/login']">Login</button>
+         
+      </form>
+    </div>
+    </div>
+   </div>
+   <div class="col-sm-4"></div>
+  </div>

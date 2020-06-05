@@ -1,0 +1,48 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid ">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+  
+        <a class="navbar-brand" [routerLink]="['/home']">
+          <strong>InfyTel</strong>
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a [routerLink]="['/profile']">View Profile</a></li>
+          <li><a [routerLink]="['/address']">View Address</a></li>
+          <li><a [routerLink]="['/card']">Card Details</a></li> 
+          <li><a [routerLink]="['/product']">View Products</a></li> 
+        </ul>
+        <button class="btn btn-primary navbar-btn navbar-right" (click)='logout()'>Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <div style="padding-bottom: 100px;">
+    <div class="form-group">
+      <button type="button" class="btn btn-primary" style="margin-left:5px;float:left;margin-right: 20%;" [routerLink]="['/home']">Back</button>
+  <input placeholder="Search here for products" class="form-control" style="width:50%" type="text" name="search" [(ngModel)]='search' (keypress)='prodsearch()'>
+
+  </div>
+  </div>
+  <div class="flex-container">
+    <div class="col-md-3 offset-3 shadow" *ngFor="let prod of prodsOfCategory">           
+        
+            <img class="rounded img-fluid" src="assets/{{prod.pimage}}" height="150px" width="200px" >
+            <div class="prodname card-title"><a [routerLink]="['/productDetails',prod.pid]">{{prod.pname}}</a>
+                &nbsp;&nbsp;<br>
+                <span style="color:white; background-color:orange "class="badge">{{prod.prating}} <span class="glyphicon glyphicon-star"></span> </span> 
+            </div>
+            <div class="card-body">                    
+                <div>{{prod.pdescription}}</div>
+                <div class="price">{{prod.pprice |currency:'INR'}}</div>                
+            </div>  
+    </div>
+</div>
+    
+    
